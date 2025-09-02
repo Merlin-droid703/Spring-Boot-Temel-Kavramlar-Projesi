@@ -1,5 +1,7 @@
 package com.example.demo.book;
 
+import com.example.demo.student.Student;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,11 @@ public class Book {
     private String title;
     private String author;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    @JsonBackReference
+    private Student student;
 
     public Book() {
     }
@@ -40,5 +47,13 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
