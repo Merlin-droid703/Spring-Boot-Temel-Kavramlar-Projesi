@@ -13,6 +13,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
 
 
     public Student() {
@@ -49,5 +50,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getMajor() { // <-- YENİ GETTER
+        return major;
+    }
+
+    public void setMajor(String major) { // <-- YENİ SETTER
+        this.major = major;
     }
 }
