@@ -1,6 +1,10 @@
 package com.example.demo.student;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference; // <-- Düzeltme burada (import eklendi)
 import jakarta.persistence.*;
+import com.example.demo.book.Book;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "students")
@@ -15,11 +19,14 @@ public class Student {
     private String email;
     private String major;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Book> books = new HashSet<>();
 
     public Student() {
     }
 
-    // Getters and Setters...
+    // --- Getters and Setters ---
     public Long getId() {
         return id;
     }
@@ -52,11 +59,19 @@ public class Student {
         this.email = email;
     }
 
-    public String getMajor() { // <-- YENİ GETTER
+    public String getMajor() {
         return major;
     }
 
-    public void setMajor(String major) { // <-- YENİ SETTER
+    public void setMajor(String major) {
         this.major = major;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }
